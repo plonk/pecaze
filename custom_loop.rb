@@ -64,8 +64,6 @@ class MainWindow < Gtk::Window
     cr.scale(f, f)
 
     @clock_renderer.draw(cr)
-
-
     cr.destroy
   end
 

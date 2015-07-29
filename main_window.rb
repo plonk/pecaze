@@ -1,4 +1,4 @@
-# -*- coding: undecided -*-
+# -*- coding: utf-8 -*-
 require 'gtk2'
 require_relative 'clock_renderer'
 include Gtk
@@ -59,8 +59,14 @@ class MainWindow < Gtk::Window
 
   def redraw
     cr = window.create_cairo_context
-    w, h = size
-    cr.scale(w,h)
+    cr.scale(*size)
+
+    # center を中心に f 倍に拡大する
+    f = 1.25
+    center = 0.5
+    cr.translate(-(center * (f - 1)), -(center * (f - 1)))
+    cr.scale(f, f)
+
     @clock_renderer.draw(cr)
     cr.destroy
   end
