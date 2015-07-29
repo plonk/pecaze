@@ -8,7 +8,7 @@ class ClockRenderer
 
   DIGIT_DISTANCE = 0.3
 
-  SEC_HAND_LENGTH = 0.28
+  SEC_HAND_LENGTH = 0.30
   SEC_HAND_WIDTH = 0.005
 
   MIN_HAND_LENGTH = 0.30
@@ -91,9 +91,13 @@ class ClockRenderer
     STRAIGHT_UP_RADIAN + value / unit.to_f * 2 * PI
   end
 
+  OPPOSITE_LENGTH = 0.025
+
   def draw_hand(cr, width, length, dir, color)
     cr.set_line_width width
     cr.set_source_rgb(*color)
+    cr.move_to(0.5, 0.5)
+    cr.rel_line_to(OPPOSITE_LENGTH * cos(dir + 1*PI), OPPOSITE_LENGTH * sin(dir + 1*PI))
     cr.move_to(0.5, 0.5)
     cr.rel_line_to(length * cos(dir), length * sin(dir))
     cr.stroke
